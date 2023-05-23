@@ -1,0 +1,15 @@
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: 
+    - 'build'
+    - '-t'
+    - 'us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:$COMMIT_SHA'
+    - '-t'
+    - 'us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:latest'
+    - '.'
+# Push container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-tsecond/nextjs-second:$COMMIT_SHA' ]
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:latest' ]

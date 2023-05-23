@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextjs-second
+spec:
+  selector:
+    matchLabels:
+      app: nextjs-second
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nextjs-second
+    spec:
+      containers:
+        - name: nextjs-second
+          image: us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:latest
+          ports:
+           - containerPort: 3000
