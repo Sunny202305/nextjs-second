@@ -19,7 +19,7 @@ steps:
   args:
     - set
     - image
-    - deployment/nexjs-second
+    - deployment/nextjs-second
     - nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:$COMMIT_SHA
   env:
     - CLOUDSDK_COMPUTE_ZONE=us-central1-c
@@ -34,5 +34,5 @@ steps:
 #       '--delivery-pipeline', 'nextjs-cbcd-pipeline',
 #       '--region', 'us-central1',
 #       '--annotations', 'commitId=${REVISION_ID}',
-#       '--images', 'nextjs-cbcd=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
+#       '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
 #     ]
