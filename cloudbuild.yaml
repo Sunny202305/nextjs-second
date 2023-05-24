@@ -16,7 +16,8 @@ steps:
 
 # Deploy image to GKE
 # 1.Need to check if the deployment and service existed, if not create them.
-# 2.Double check of permission granted to CloudBuild service account for manage GKE Cluster. 
+# 2.Double check of permission granted to CloudBuild service account for managing GKE Cluster. 
+#   in our case, grant Kubernetes Engine Admin permission to CloudBuild Service account. 
 - name: gcr.io/cloud-builders/kubectl
   args:
     - set
