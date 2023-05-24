@@ -11,3 +11,4 @@ manifests:
   kustomize:
     paths:
       - .
+    buildArgs: []

@@ -6,7 +6,9 @@ spec:
   selector:
     matchLabels:
       app: nextjs-second
-  replicas: 2
+  replicas: 
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -14,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nextjs-second
-          image: us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:latest
+          image: us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second
           ports:
            - containerPort: 3000
