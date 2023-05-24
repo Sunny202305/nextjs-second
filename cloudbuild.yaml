@@ -19,11 +19,11 @@ steps:
   args:
     - set
     - image
-    - deployment/nextjs-second
+    - deployment/nexjs-second
     - nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:$COMMIT_SHA
   env:
-    - CLOUDSDK_COMPUTE_ZONE=us-central1
-    - CLOUDSDK_CONTAINER_CLUSTER=nextjs-test-gke
+    - CLOUDSDK_COMPUTE_ZONE=us-central-c
+    - CLOUDSDK_CONTAINER_CLUSTER=nextjs-cbcd
 
 # Create release in Google Cloud Deploy(Multiple Targets Example)
 # - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -34,5 +34,5 @@ steps:
 #       '--delivery-pipeline', 'nextjs-cbcd-pipeline',
 #       '--region', 'us-central1',
 #       '--annotations', 'commitId=${REVISION_ID}',
-#       '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
+#       '--images', 'nextjs-cbcd=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
 #     ]
