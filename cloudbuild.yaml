@@ -18,15 +18,15 @@ steps:
 # 1.Need to check if the deployment and service existed, if not create them.
 # 2.Double check of permission granted to CloudBuild service account for managing GKE Cluster. 
 #   in our case, grant Kubernetes Engine Admin permission to CloudBuild Service account. 
-- name: gcr.io/cloud-builders/kubectl
-  args:
-    - set
-    - image
-    - deployment/nextjs-second
-    - nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:$COMMIT_SHA
-  env:
-    - CLOUDSDK_COMPUTE_ZONE=us-central1-c
-    - CLOUDSDK_CONTAINER_CLUSTER=nextjs-cbcd
+# - name: gcr.io/cloud-builders/kubectl
+#   args:
+#     - set
+#     - image
+#     - deployment/nextjs-second
+#     - nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:$COMMIT_SHA
+#   env:
+#     - CLOUDSDK_COMPUTE_ZONE=us-central1-c
+#     - CLOUDSDK_CONTAINER_CLUSTER=nextjs-cbcd
 
 # Create release in Google Cloud Deploy
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -39,3 +39,15 @@ steps:
       '--annotations', 'commitId=${REVISION_ID}',
       '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
     ]
+
+# Create release in Google Cloud Deploy(Auto Promote from Staging to Production)
+# - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+#   entrypoint: gcloud
+#   args:
+#     [
+#       'deploy', 'releases', 'promote',
+#       '--release', 'rel-${SHORT_SHA}',
+#       '--delivery-pipeline', 'nextjs-cbcd-pipeline',
+#       '--region', 'us-central1',
+#       '--to-target', 'nextjs-cbcd-prod'
+#     ]
