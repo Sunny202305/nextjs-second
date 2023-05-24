@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: nextjs-second
 build:
+  tagPolicy:
+    getCommit: {}
   artifacts:
     - image: us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second
       docker:

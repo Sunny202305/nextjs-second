@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: nextjs-second
-  replicas: 
+  replicas: 1
   strategy:
     type: RollingUpdate
   template:
