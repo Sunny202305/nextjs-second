@@ -28,14 +28,14 @@ steps:
     - CLOUDSDK_COMPUTE_ZONE=us-central1-c
     - CLOUDSDK_CONTAINER_CLUSTER=nextjs-cbcd
 
-# Create release in Google Cloud Deploy(Multiple Targets Example)
-# - name: gcr.io/google.com/cloudsdktool/cloud-sdk
-#   entrypoint: gcloud
-#   args:
-#     [
-#       'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
-#       '--delivery-pipeline', 'nextjs-cbcd-pipeline',
-#       '--region', 'us-central1',
-#       '--annotations', 'commitId=${REVISION_ID}',
-#       '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
-#     ]
+# Create release in Google Cloud Deploy
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: gcloud
+  args:
+    [
+      'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
+      '--delivery-pipeline', 'nextjs-cbcd-pipeline',
+      '--region', 'us-central1',
+      '--annotations', 'commitId=${REVISION_ID}',
+      '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
+    ]
