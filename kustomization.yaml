@@ -5,4 +5,5 @@ resources:
   - k8s/base/service.yaml
 images:
   - name: nextjs-second
-  - newTag: ${COMMIT_SHA}
+  - newTag: efbe47b0c711f9d1f6a005ebf5d46f3f68ec9793
+  #${COMMIT_SHA}
