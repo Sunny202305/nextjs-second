@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: nextjs-second
-          image: us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second
+          image: us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}
           ports:
            - containerPort: 3000
