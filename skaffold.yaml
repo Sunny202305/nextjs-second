@@ -4,11 +4,17 @@ metadata:
   name: nextjs-second
 build:
   artifacts:
+    tagPolicy:
+      gitCommit:
+        variant: CommitSha
+      # envTemplate:
+      #   template: "{{.FOO}}"
     - image: us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second
       docker:
         dockerfile: Dockerfile
-manifests:
-  kustomize:
-    paths:
-      - .
-    buildArgs: []
+# manifests:
+#   kustomize:
+#     paths:
+#       - .
+#     buildArgs:
+#       - "--digest-source='remote'"

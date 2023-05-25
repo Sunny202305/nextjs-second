@@ -28,17 +28,18 @@ steps:
 #     - CLOUDSDK_COMPUTE_ZONE=us-central1-c
 #     - CLOUDSDK_CONTAINER_CLUSTER=nextjs-cbcd
 
-# Create release in Google Cloud Deploy
-- name: gcr.io/google.com/cloudsdktool/cloud-sdk
-  entrypoint: gcloud
-  args:
-    [
-      'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
-      '--delivery-pipeline', 'nextjs-cbcd-pipeline',
-      '--region', 'us-central1',
-      '--annotations', 'commitId=${REVISION_ID}',
-      '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
-    ]
+# # Create release in Google Cloud Deploy
+# - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+#   entrypoint: gcloud
+#   args:
+#     [
+#       'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
+#       '--delivery-pipeline', 'nextjs-cbcd-pipeline',
+#       '--region', 'us-central1',
+#       '--annotations', 'commitId=${REVISION_ID}',
+#       '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
+#       '--digest-source', ''
+#     ]
 
 # Create release in Google Cloud Deploy(Auto Promote from Staging to Production)
 # - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -51,3 +52,21 @@ steps:
 #       '--region', 'us-central1',
 #       '--to-target', 'nextjs-cbcd-prod'
 #     ]
+
+steps:
+- name: gcr.io/k8s-skaffold/skaffold
+  args:
+    - skaffold
+    - build
+    - '--interactive=false'
+    - '--file-output=/workspace/artifacts.json'
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: gcloud
+  args:
+    [
+      "deploy", "releases", "create", "rel-${SHORT_SHA}",
+      "--delivery-pipeline", "PIPELINE_NAME",
+      "--region", "us-central1",
+      "--annotations", "commitId=${REVISION_ID}",
+      "--build-artifacts", "/workspace/artifacts.json"
+    ]
