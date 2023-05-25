@@ -38,7 +38,6 @@ steps:
 #       '--region', 'us-central1',
 #       '--annotations', 'commitId=${REVISION_ID}',
 #       '--images', 'nextjs-second=us-central1-docker.pkg.dev/flyntlok-test-project/nextjs-second/nextjs-second:${COMMIT_SHA}'
-#       '--digest-source', ''
 #     ]
 
 # Create release in Google Cloud Deploy(Auto Promote from Staging to Production)
@@ -65,7 +64,7 @@ steps:
   args:
     [
       "deploy", "releases", "create", "rel-${SHORT_SHA}",
-      "--delivery-pipeline", "PIPELINE_NAME",
+      "--delivery-pipeline", "nextjs-cbcd-pipeline",
       "--region", "us-central1",
       "--annotations", "commitId=${REVISION_ID}",
       "--build-artifacts", "/workspace/artifacts.json"
