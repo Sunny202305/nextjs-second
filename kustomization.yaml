@@ -3,3 +3,6 @@ kind: Kustomization
 resources:
   - k8s/base/deployment.yaml
   - k8s/base/service.yaml
+images:
+  - name: nextjs-second
+  - newTag: ${COMMIT_SHA}
