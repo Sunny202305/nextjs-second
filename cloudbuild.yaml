@@ -52,7 +52,6 @@ steps:
 #       '--to-target', 'nextjs-cbcd-prod'
 #     ]
 
-steps:
 - name: gcr.io/k8s-skaffold/skaffold
   args:
     - skaffold
